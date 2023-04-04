@@ -16,7 +16,7 @@ module gitee.com.ericfox.ddd.infrastructure {
     requires r2dbc.spi;
     requires reactor.core;
 
-//    exports gitee.com.ericfox.ddd.infrastructure.persistent.po.sys;
+    exports gitee.com.ericfox.ddd.infrastructure.persistent.po.sys;
     exports gitee.com.ericfox.ddd.infrastructure.service.repo;
     exports gitee.com.ericfox.ddd.infrastructure.service.repo.impl;
 }

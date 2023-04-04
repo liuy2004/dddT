@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         scanBasePackages = {
                 "gitee.com.ericfox.ddd.api.controller",
                 "gitee.com.ericfox.ddd.api.config",
-                "gitee.com.ericfox.ddd.api.events",
                 "gitee.com.ericfox.ddd.context.*.converter",
         }
 )
