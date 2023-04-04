@@ -1,0 +1,22 @@
+package ${rootPackage}.infrastructure.persistent.dao.${meta.domainName}.my_sql_repo_strategy;
+
+import ${rootPackage}.infrastructure.persistent.po.${meta.domainName}.${meta.ClassName};
+import ${rootPackage}.infrastructure.service.repo.impl.JFinalBaseDao;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Repository;
+
+import java.io.Serializable;
+
+@Repository
+@Setter
+@Getter
+public class ${meta.ClassName}Dao extends JFinalBaseDao<${meta.ClassName}, ${meta.ClassName}Dao> {
+    public static final ${meta.ClassName}Dao dao = new ${meta.ClassName}Dao().dao();
+    private Serializable id;
+
+    @Override
+    public Class<${meta.ClassName}> poClass() {
+        return ${meta.ClassName}.class;
+    }
+}

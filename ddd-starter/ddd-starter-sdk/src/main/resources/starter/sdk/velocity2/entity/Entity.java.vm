@@ -1,0 +1,15 @@
+package ${rootPackage}.domain.${meta.domainName}.model.${meta.class_name};
+
+import ${rootPackage}.infrastructure.persistent.po.${meta.domainName}.${meta.ClassName};
+
+public class ${meta.ClassName}Entity extends ${meta.ClassName}EntityBase {
+    @Override
+    public ${meta.ClassName} toPo() {
+        return super;
+    }
+
+    @Override
+    public ${meta.ClassName}Entity fromPo(${meta.ClassName} po) {
+        return super.fromPo(po);
+    }
+}

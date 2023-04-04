@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "username": "Admin",
+    "nickname": "管理员"
+  },
+  {
+    "id": 2,
+    "username": "Anonymous",
+    "nickname": "不愿意透露姓名的英雄"
+  },
+  {
+    "id": 3,
+    "username": "WangZhibin",
+    "nickname": "王志斌",
+    "email": "841958335@qq.com"
+  }
+]

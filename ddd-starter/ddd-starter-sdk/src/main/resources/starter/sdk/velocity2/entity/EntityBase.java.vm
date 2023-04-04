@@ -1,0 +1,68 @@
+package ${rootPackage}.domain.${meta.domainName}.model.${meta.class_name};
+
+import ${rootPackage}.common.interfaces.domain.BaseCondition;
+import ${rootPackage}.common.interfaces.domain.BaseEntity;
+import ${rootPackage}.common.interfaces.infrastructure.Constants;
+import ${rootPackage}.common.toolkit.coding.BeanUtil;
+import ${rootPackage}.common.toolkit.coding.SpringUtil;
+import ${rootPackage}.infrastructure.persistent.po.${meta.domainName}.${meta.ClassName};
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class ${meta.ClassName}EntityBase implements BaseEntity<${meta.ClassName}, ${meta.ClassName}Entity> {
+    private static ${meta.ClassName}Service _${meta.className}Service;
+    protected BaseCondition<?> _condition;
+    protected ${meta.ClassName} _po;
+
+    /**
+     * 上下文-类型
+     */
+    ${meta.ClassName}Context.Description _description;
+    /**
+     * 上下文-时间
+     */
+    ${meta.ClassName}Context.Moment _moment;
+    /**
+     * 上下文-角色
+     */
+    ${meta.ClassName}Context.Rule _rule;
+
+    #foreach($item in $meta.fieldClassMap.entrySet())
+#if(!!$meta.fieldCommentMap.get(${item.key}))
+    /**
+     * ${meta.fieldCommentMap.get(${item.key})}
+     */
+#end
+#if(${strUtil.startWith(${item.value.name}, "java.lang")})
+    private ${item.value.simpleName} ${item.key};
+#else
+    private ${item.value.name} ${item.key};
+#end
+#end
+
+    @Override
+    public synchronized ${meta.ClassName}Service service() {
+        if (_${meta.className}Service == null) {
+            _${meta.className}Service = SpringUtil.getBean(${meta.ClassName}Service.class);
+        }
+        return _${meta.className}Service;
+    }
+
+    @Override
+    public ${meta.ClassName} toPo() {
+        if (_po == null) {
+            _po = new ${meta.ClassName}();
+        }
+        BeanUtil.copyProperties(this, _po, Constants.IGNORE_NULL_VALUE_COPY_OPTIONS);
+        return _po;
+    }
+
+    @Override
+    public ${meta.ClassName}Entity fromPo(${meta.ClassName} _po) {
+        this._po = _po;
+        BeanUtil.copyProperties(_po, this, Constants.IGNORE_NULL_VALUE_COPY_OPTIONS);
+        return (${meta.ClassName}Entity) this;
+    }
+}

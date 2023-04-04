@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+  <title>[[${title}]]</title>
+  <!--<link type="text/css" th:href="${viewPath} + '/css/common.css'">-->
+  <script th:src="${viewPath} + '/js/vue.js'"></script>
+</head>
+
+<body>
+<div id="app">
+  <ddd-sdk font-size="2rem"></ddd-sdk>
+</div>
+</body>
+
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "[(${viewPath})]/js/vue.js"
+    }
+  }
+</script>
+<script>
+  const {createApp, defineCustomElement} = Vue
+  const vm = createApp({
+    data() {
+      return {}
+    }
+  }).mount('#app')
+</script>
+<script th:src="${viewPath} + '/components' + ${sdkPath}" type="module"></script>
+
+<style>
+  html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+</style>
+</html>

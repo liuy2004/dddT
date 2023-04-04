@@ -1,0 +1,132 @@
+buildscript {
+    ext {
+        springBootVersion = '3.0.5'
+        springDependencyVersion = '1.1.0'
+        nativeVersion = '0.9.20'
+        hutoolVersion = '5.8.16'
+        mapstructVersion = '1.5.3.Final'
+        luceneVersion = '9.5.0'
+        ikanalyzerVersion = '2012_u6'
+    }
+}
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyVersion}"
+    id 'org.graalvm.buildtools.native' version "${nativeVersion}"
+}
+apply plugin: 'io.spring.dependency-management'
+group = 'gitee.com.ericfox.ddd'
+version = "0.1.0"
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+repositories {
+    mavenCentral()
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+dependencies {
+    implementation project(':ddd-api')
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.graalvm.buildtools.native'
+    group = 'gitee.com.ericfox.ddd'
+    version = "0.1.0"
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    repositories {
+        mavenCentral()
+    }
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+    }
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter-web"
+        implementation "cn.hutool:hutool-all:${hutoolVersion}"
+        compileOnly "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok"
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    }
+}
+
+project(':ddd-common') {
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter-rsocket"
+        implementation "org.springframework.boot:spring-boot-starter-webflux"
+        implementation "jakarta.transaction:jakarta.transaction-api"
+        implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+        developmentOnly "org.springframework.boot:spring-boot-devtools"
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+        testImplementation "io.projectreactor:reactor-test"
+    }
+}
+project(':ddd-context') {
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+    dependencies {
+        implementation project(':ddd-common')
+    }
+}
+project(':ddd-infrastructure') {
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+    dependencies {
+        implementation project(':ddd-common')
+        implementation project(':ddd-starter')
+        implementation "org.springframework.boot:spring-boot-starter-data-r2dbc"
+        implementation "io.r2dbc:r2dbc-h2"
+        implementation "com.squareup.okhttp3:okhttp"
+        implementation "org.apache.lucene:lucene-highlighter:${luceneVersion}"
+        implementation "org.apache.lucene:lucene-queryparser:${luceneVersion}"
+        implementation "com.janeluo:ikanalyzer:${ikanalyzerVersion}"
+    }
+}
+project(':ddd-application') {
+    dependencies {
+        implementation project(':ddd-common')
+        implementation project(':ddd-context')
+        implementation project(':ddd-infrastructure')
+        implementation project(':ddd-domain-sys')
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+    }
+    springBoot {
+        mainClass = 'gitee.com.ericfox.ddd.application.AppApplication'
+    }
+}
+project(':ddd-api') {
+    dependencies {
+        implementation project(':ddd-common')
+        implementation project(':ddd-context')
+        implementation "org.springframework.boot:spring-boot-starter-rsocket"
+        implementation "org.springframework.boot:spring-boot-starter-webflux"
+    }
+    springBoot {
+        mainClass = 'gitee.com.ericfox.ddd.api.ApiApplication'
+    }
+}

@@ -1,0 +1,33 @@
+package ${rootPackage}.api.controller.${meta.domainName};
+
+import ${rootPackage}.api.controller.${meta.domainName}.base.${meta.ClassName}ControllerBase;
+import ${rootPackage}.domain.${meta.domainName}.model.${meta.class_name}.${meta.ClassName}Entity;
+import ${rootPackage}.infrastructure.general.toolkit.api.ResBuilder;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequestMapping("/${meta.domainName}/${meta.className}")
+@Slf4j
+public class ${meta.ClassName}Controller extends ${meta.ClassName}ControllerBase {
+    @Override
+    @PutMapping("/create")
+    public ResponseEntity<?> create(@RequestBody ${meta.ClassName}Entity entity) {
+        return ResBuilder.noData().setStatus(METHOD_NOT_ALLOWED_405).build();
+    }
+
+    @Override
+    @PatchMapping("/edit")
+    public ResponseEntity<?> edit(${meta.ClassName}Entity entity) {
+        return ResBuilder.noData().setStatus(METHOD_NOT_ALLOWED_405).build();
+    }
+
+    @Override
+    @DeleteMapping("/remove")
+    public ResponseEntity<?> remove(${meta.ClassName}Entity entity) {
+        return ResBuilder.noData().setStatus(METHOD_NOT_ALLOWED_405).build();
+    }
+
+}

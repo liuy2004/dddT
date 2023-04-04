@@ -1,0 +1,130 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+  <title>[[${title}]]</title>
+  <script th:src="${viewPath} + '/js/vue.js'"></script>
+  <link rel="stylesheet" th:href="${viewPath} + '/css/vditor/index.css'"/>
+  <script th:src="${viewPath} + '/js/vditor.min.js'"></script>
+
+  <link rel="stylesheet" th:href="${viewPath} + '/css/element-plus/index.css'" />
+  <script th:src="${viewPath} + '/js/element-plus.js'"></script>
+</head>
+
+<body>
+<div id="app">
+  <el-input
+    v-show="!showTree"
+    @keydown.enter="showTree = !showTree"
+    placeholder="请输入或选择一个用户"
+  ></el-input>
+  <el-tree
+      v-show="showTree"
+      :data="dataSource"
+      node-key="id"
+      default-expand-all
+      @node-click="handleNodeClick"
+      :expand-on-click-node="false"
+  ></el-tree>
+  <!--<ddd-wiki-directory></ddd-wiki-directory>-->
+  <div id="markdown_root"></div>
+  <ddd-wiki-editor
+      div-id="markdown_root"
+      v-if="showEditor"
+      :path="path"
+  >
+  </ddd-wiki-editor>
+</div>
+</body>
+
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "[(${viewPath})]/js/vue.js"
+    }
+  }
+</script>
+<script>
+  const {createApp, defineCustomElement} = Vue
+  let app = undefined
+  let vm
+
+  let ElMessage
+</script>
+<script type="module">
+  import axios from '[[${viewPath}]]/components/axios/index.js'
+  import {RestApi, HttpType} from '[[${viewPath}]]/components/ddd-sdk/api-rest.js'
+
+  const restApi = new RestApi(HttpType.AXIOS, axios)
+
+  import eleStyle from '[[${viewPath}]]/css/element-plus/index.css.js'
+
+  app = createApp({
+    data() {
+      return {
+        dataSource: [],
+        path: '/HomePage.md',
+        showEditor: true,
+        showTree: true,
+        userList: []
+      }
+    },
+    methods: {
+      handleNodeClick(data) {
+        if (data.detail[0].id) {
+          console.warn(data.detail[0])
+          this.path = data.detail[0].path
+          this.showEditor = false
+          this.showEditor = true
+        }
+      },
+      login() {
+        this.showTree = true
+      }
+    },
+    mounted() {
+      restApi.execute('wiki --ls').then(res => {
+        if (res.data && res.data.length > 0) {
+          this.dataSource = res.data
+        }
+      })
+    }
+  })
+  app.config.compilerOptions.isCustomElement = tag => tag.includes('-')
+  vm = app.mount('#app')
+
+  ElementPlus.ElTree.styles = [eleStyle]
+  customElements.define('el-tree', defineCustomElement(ElementPlus.ElTree))
+
+  ElementPlus.ElInput.styles = [eleStyle]
+  customElements.define('el-input', defineCustomElement(ElementPlus.ElInput))
+
+  ElementPlus.ElMessage.styles = [eleStyle]
+  ElMessage = ElementPlus.ElMessage
+  customElements.define('el-message', defineCustomElement(ElementPlus.ElMessage))
+</script>
+<script th:src="${viewPath} + '/components' + ${editorPath}" type="module"></script>
+<script th:src="${viewPath} + '/components' + ${directoryPath}" type="module"></script>
+
+<style>
+  html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  #app {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+
+  ddd-wiki-directory, el-tree {
+    width: 20%;
+    height: auto;
+  }
+
+  el-input {
+    width: 20%;
+    height: 2rem;
+  }
+</style>
+</html>

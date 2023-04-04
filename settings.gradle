@@ -1,0 +1,26 @@
+/**
+ * 项目名称
+ */
+rootProject.name = "ddd"
+
+/**
+ * 根模块
+ */
+include ':ddd-api' //api层
+include ':ddd-application' //应用层
+include ':ddd-domain' //领域层
+include ':ddd-infrastructure' //基础设施层
+include ':ddd-starter' //拓展功能层
+include ':ddd-common' //通用依赖
+include ':ddd-context' //上下文层
+
+/**
+ * 领域层
+ */
+include ':ddd-domain-sys' //系统领域
+project(':ddd-domain-sys').projectDir = "$rootDir/ddd-domain/ddd-domain-sys" as File
+/**
+ * 拓展功能
+ */
+include ':ddd-starter-sdk' //开发工具
+project(':ddd-starter-sdk').projectDir = "$rootDir/ddd-starter/ddd-starter-sdk" as File
