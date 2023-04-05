@@ -5,5 +5,5 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SysUserBo {
+public class SysUserBo extends SysUserBoBase {
 }

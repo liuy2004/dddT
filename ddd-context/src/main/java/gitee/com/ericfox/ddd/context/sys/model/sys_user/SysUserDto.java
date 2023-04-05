@@ -8,4 +8,6 @@ import lombok.Setter;
 @Getter
 public class SysUserDto implements BaseDto {
     public static final String BUS_NAME = "SysUserDto";
+
+    private Long id;
 }

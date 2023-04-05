@@ -7,6 +7,7 @@ buildscript {
         mapstructVersion = '1.5.3.Final'
         luceneVersion = '9.5.0'
         ikanalyzerVersion = '2012_u6'
+        mapstructVersion = '1.5.3.Final'
     }
 }
 plugins {
@@ -58,6 +59,8 @@ subprojects {
         compileOnly "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok"
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+        testImplementation "io.projectreactor:reactor-test"
     }
 }
 
@@ -74,8 +77,6 @@ project(':ddd-common') {
         implementation "jakarta.transaction:jakarta.transaction-api"
         implementation "org.mapstruct:mapstruct:${mapstructVersion}"
         developmentOnly "org.springframework.boot:spring-boot-devtools"
-        testImplementation "org.springframework.boot:spring-boot-starter-test"
-        testImplementation "io.projectreactor:reactor-test"
     }
 }
 project(':ddd-context') {
@@ -87,6 +88,8 @@ project(':ddd-context') {
     }
     dependencies {
         implementation project(':ddd-common')
+        compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
+        annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     }
 }
 project(':ddd-infrastructure') {

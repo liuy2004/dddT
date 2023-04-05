@@ -4,7 +4,6 @@ import gitee.com.ericfox.ddd.common.annotations.dao.*;
 import gitee.com.ericfox.ddd.common.enums.contants.BooleanEnums;
 import gitee.com.ericfox.ddd.common.enums.db.MySqlDataTypeEnum;
 import gitee.com.ericfox.ddd.common.enums.strategy.RepoTypeStrategyEnum;
-import gitee.com.ericfox.ddd.common.interfaces.infrastructure.BasePo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

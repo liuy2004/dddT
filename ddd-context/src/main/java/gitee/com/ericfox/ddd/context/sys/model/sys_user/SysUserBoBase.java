@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class SysUserEntityBase {
+public class SysUserBoBase {
     private static SysUserService _sysUserService;
     protected BaseCondition<?> _condition;
 
