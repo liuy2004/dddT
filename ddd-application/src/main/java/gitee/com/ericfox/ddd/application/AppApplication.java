@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                 "gitee.com.ericfox.ddd.starter.*.properties",
                 "gitee.com.ericfox.ddd.starter.*.service",
                 "gitee.com.ericfox.ddd.starter.*.config",
+                "gitee.com.ericfox.ddd.context.*.converter",
                 "gitee.com.ericfox.ddd.common.properties",
         }
 )

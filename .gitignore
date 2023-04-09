@@ -39,3 +39,4 @@ ddd-domain-gen/src/main/resources/gen/meta_home/*/*.xml
 /lucene
 /gradle/
 .gradle
+gradlew.sh
