@@ -46,7 +46,8 @@ allprojects {
 project(':ddd-starter-sdk') {
     dependencies {
         implementation project(':ddd-common')
-        implementation "org.springframework.boot:spring-boot-starter-rsocket"
+        implementation 'org.springframework.boot:spring-boot-starter-webflux'
         implementation "com.jfinal:activerecord:5.0.4"
+        implementation "org.springframework.boot:spring-boot-starter-websocket"
     }
 }

@@ -1,4 +1,4 @@
-package gitee.com.ericfox.ddd.starter.sdk.service.gen_code;
+package gitee.com.ericfox.ddd.starter.sdk.service.command.gen_code;
 
 import gitee.com.ericfox.ddd.common.interfaces.infrastructure.Constants;
 import gitee.com.ericfox.ddd.common.properties.CustomProperties;

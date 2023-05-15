@@ -1,4 +1,4 @@
-package gitee.com.ericfox.ddd.starter.sdk.service.gen_code;
+package gitee.com.ericfox.ddd.starter.sdk.service.command.gen_code;
 
 //import cn.hutool.core.bean.copier.CopyOptions;
 //import com.jfinal.plugin.activerecord.Db;

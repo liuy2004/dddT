@@ -14,9 +14,10 @@ module gitee.com.ericfox.ddd.starter.sdk {
     requires spring.core;
     requires jakarta.annotation;
     requires java.sql;
+    requires spring.websocket;
 //    requires activerecord;
 
     exports gitee.com.ericfox.ddd.starter.sdk.properties;
-    exports gitee.com.ericfox.ddd.starter.sdk.service.gen_code;
+    exports gitee.com.ericfox.ddd.starter.sdk.service.command.gen_code;
     exports gitee.com.ericfox.ddd.starter.sdk.service;
 }

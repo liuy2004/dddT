@@ -2,6 +2,7 @@ package gitee.com.ericfox.ddd.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 @SpringBootApplication(
         scanBasePackages = {
@@ -19,7 +20,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                 "gitee.com.ericfox.ddd.starter.*.config",
                 "gitee.com.ericfox.ddd.context.*.converter",
                 "gitee.com.ericfox.ddd.common.properties",
-        }
+        }, exclude = {
+        SecurityAutoConfiguration.class
+}
 )
 public class AppApplication {
     public static void main(String[] args) {

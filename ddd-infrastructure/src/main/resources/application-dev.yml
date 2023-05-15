@@ -8,6 +8,7 @@ eureka:
       defaultZone:
         - http://localhost:9080/eureka
         - http://localhost:9081/eureka
+
 spring:
   r2dbc:
     url: r2dbc:h2:mem://./testdb
@@ -87,16 +88,6 @@ spring:
       time: HH:mm:ss
       datetime: yyyy-MM-dd HH:mm:ss
 debug: false
-flowable:
-  async-executor-activate: false
-  #是否开启自动部署流程定义
-  check-process-definitions: true
-  #流程定义文件位置
-  process-definition-location-prefix: classpath*:/starter/bpm/
-  #流程文件后缀
-  process-definition-location-suffixes:
-    - "**.bpmn.xml"
-    - "**.bpmn"
 logging:
   charset:
     file: UTF-8

@@ -1,4 +1,4 @@
-package gitee.com.ericfox.ddd.starter.sdk.service.gen_code;
+package gitee.com.ericfox.ddd.starter.sdk.service.command.gen_code;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.extra.template.Template;
